@@ -15,19 +15,6 @@ on:
       - package.json
       - package-lock.json
       - .github/workflows/homepage-assets.yml
-  pull_request:
-    branches:
-      - main
-    paths:
-      - data/homepage-assets.json
-      - scripts/fetch-homepage-assets.mjs
-      - scripts/check-homepage-contrast.mjs
-      - scripts/capture-homepage-screenshots.mjs
-      - app/page.tsx
-      - app/globals.css
-      - package.json
-      - package-lock.json
-      - .github/workflows/homepage-assets.yml
 
 permissions:
   contents: write
