@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "assets:homepage": "node scripts/fetch-homepage-assets.mjs",
-    "assets:homepage:verify": "node scripts/fetch-homepage-assets.mjs --verify-only"
+    "assets:homepage:verify": "node scripts/fetch-homepage-assets.mjs --verify-only",
+    "test:homepage:contrast": "node scripts/check-homepage-contrast.mjs",
+    "test:homepage:screenshots": "node scripts/capture-homepage-screenshots.mjs"
   },
   "dependencies": {
     "next": "16.2.10",
