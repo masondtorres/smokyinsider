@@ -1,5 +1,6 @@
 name: Acquire and audit homepage photographs
 
+# Retry triggered after first-run lockfile repair on 2026-07-21.
 on:
   workflow_dispatch:
   push:
