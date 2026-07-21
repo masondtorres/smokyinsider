@@ -1,0 +1,105 @@
+name: Acquire and audit homepage photographs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - visual-homepage-field-guide-v1
+    paths:
+      - data/homepage-assets.json
+      - scripts/fetch-homepage-assets.mjs
+      - scripts/check-homepage-contrast.mjs
+      - scripts/capture-homepage-screenshots.mjs
+      - app/page.tsx
+      - app/globals.css
+      - package.json
+      - package-lock.json
+      - .github/workflows/homepage-assets.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: homepage-assets-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  acquire-build-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: visual-homepage-field-guide-v1
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Acquire and verify rights-cleared photographs
+        run: npm run assets:homepage
+
+      - name: Verify color contrast
+        run: npm run test:homepage:contrast
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build production site
+        run: npm run build
+
+      - name: Install Chromium screenshot runner
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start production server
+        run: |
+          npm run start -- -H 127.0.0.1 -p 3000 > /tmp/smokyinsider-next.log 2>&1 &
+          echo $! > /tmp/smokyinsider-next.pid
+          for attempt in {1..45}; do
+            if curl --fail --silent --show-error http://127.0.0.1:3000 > /dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/smokyinsider-next.log
+          exit 1
+
+      - name: Capture and audit seven responsive sizes
+        run: npm run test:homepage:screenshots
+
+      - name: Upload responsive screenshot package
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-responsive-screenshots
+          path: artifacts/homepage-screenshots
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit acquired photographs and generated audit records
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/homepage data/homepage-assets.lock.json docs/homepage-visual-asset-manifest.md docs/homepage-contrast-report.md
+          if git diff --cached --quiet; then
+            echo "Verified assets and audit records are already current."
+          else
+            git commit -m "chore: acquire and verify homepage photographs"
+            git push origin HEAD:visual-homepage-field-guide-v1
+          fi
+
+      - name: Stop production server
+        if: always()
+        run: |
+          if [ -f /tmp/smokyinsider-next.pid ]; then
+            kill "$(cat /tmp/smokyinsider-next.pid)" || true
+          fi
