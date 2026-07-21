@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "assets:homepage": "node scripts/fetch-homepage-assets.mjs",
+    "assets:homepage:verify": "node scripts/fetch-homepage-assets.mjs --verify-only"
   },
   "dependencies": {
     "next": "16.2.10",
