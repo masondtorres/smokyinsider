@@ -30,19 +30,18 @@ jobs:
 
     steps:
       - name: Check out branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: visual-homepage-field-guide-v1
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
-          cache: npm
+          node-version: 24
 
-      - name: Install project dependencies
-        run: npm ci
+      - name: Install project dependencies and create lock file
+        run: npm install --no-audit --no-fund
 
       - name: Acquire and verify rights-cleared photographs
         run: npm run assets:homepage
@@ -89,7 +88,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/images/homepage data/homepage-assets.lock.json docs/homepage-visual-asset-manifest.md docs/homepage-contrast-report.md
+          git add package-lock.json public/images/homepage data/homepage-assets.lock.json docs/homepage-visual-asset-manifest.md docs/homepage-contrast-report.md
           if git diff --cached --quiet; then
             echo "Verified assets and audit records are already current."
           else
