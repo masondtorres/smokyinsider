@@ -70,6 +70,7 @@ html {
   html {
     scroll-behavior: auto;
   }
+
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -87,7 +88,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   line-height: 1.25;
   color: var(--color-text);
@@ -155,4 +161,487 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Homepage */
+.home-hero {
+  position: relative;
+  min-height: clamp(34rem, 73vh, 47rem);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--forest-pine);
+}
+
+.home-hero__image {
+  object-fit: cover;
+  object-position: 50% 48%;
+  z-index: -3;
+}
+
+.home-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(13, 29, 22, 0.9) 0%, rgba(13, 29, 22, 0.68) 48%, rgba(13, 29, 22, 0.22) 78%),
+    linear-gradient(0deg, rgba(13, 29, 22, 0.58) 0%, transparent 45%);
+}
+
+.home-hero__content {
+  width: 100%;
+  padding-top: clamp(6rem, 15vw, 10rem);
+  padding-bottom: clamp(4rem, 10vw, 6.5rem);
+}
+
+.home-hero h1 {
+  max-width: 14ch;
+  margin-bottom: var(--space-4);
+  color: white;
+  font-size: clamp(2.45rem, 6vw, 4.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.home-hero__lede {
+  max-width: 42rem;
+  margin: 0 0 var(--space-6);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(1.05rem, 2.1vw, 1.28rem);
+  line-height: 1.55;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-3);
+  color: var(--trail-cream);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.eyebrow--dark {
+  color: var(--barn-copper);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button--primary {
+  background: var(--trail-cream);
+  color: #173226;
+}
+
+.button--primary:hover {
+  background: #f4ead9;
+  color: #10241b;
+}
+
+.button--secondary {
+  border-color: rgba(255, 255, 255, 0.78);
+  background: rgba(20, 43, 33, 0.44);
+  color: white;
+  backdrop-filter: blur(3px);
+}
+
+.button--secondary:hover {
+  border-color: white;
+  background: rgba(20, 43, 33, 0.72);
+  color: white;
+}
+
+.home-section {
+  padding: clamp(4rem, 9vw, 6.75rem) 0;
+}
+
+.home-section--cream {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--map-cream);
+}
+
+.section-heading {
+  max-width: 45rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.section-heading h2 {
+  margin-bottom: var(--space-3);
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.section-heading > p:last-child,
+.section-heading--split > p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1.06rem;
+}
+
+.section-heading--split {
+  max-width: none;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.section-heading--split h2 {
+  margin-bottom: 0;
+}
+
+.planning-grid,
+.guide-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.photo-card,
+.guide-card,
+.town-card {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.photo-card:hover,
+.guide-card:hover,
+.town-card:hover {
+  border-color: #aaa091;
+  box-shadow: var(--shadow-lg);
+  color: var(--color-text);
+  transform: translateY(-3px);
+}
+
+.photo-card__media,
+.guide-card__media,
+.town-card__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--ridge-blue);
+}
+
+.photo-card__media {
+  aspect-ratio: 4 / 3;
+}
+
+.photo-card__media img,
+.guide-card__media img,
+.town-card__media img {
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.photo-card:hover img,
+.guide-card:hover img,
+.town-card:hover img {
+  transform: scale(1.025);
+}
+
+.photo-card__body,
+.guide-card__body,
+.town-card__body {
+  padding: var(--space-5);
+}
+
+.photo-card__body h3,
+.guide-card__body h3,
+.town-card__body h3 {
+  margin-bottom: var(--space-2);
+  font-size: 1.48rem;
+}
+
+.photo-card__body p,
+.guide-card__body p,
+.town-card__body p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.photo-card__body span,
+.guide-card__body span {
+  display: inline-block;
+  margin-top: var(--space-4);
+  color: var(--forest-pine);
+  font-size: 0.92rem;
+  font-weight: 750;
+}
+
+.value-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--forest-pine);
+  color: white;
+}
+
+.value-strip__grid {
+  display: grid;
+  gap: 0;
+}
+
+.value-strip__grid > div {
+  display: grid;
+  gap: 0.15rem;
+  padding: 1.55rem 0;
+}
+
+.value-strip__grid > div + div {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.value-strip strong {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+}
+
+.value-strip span {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+}
+
+.town-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.town-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.town-card__body {
+  padding: 1.15rem 1.2rem 1.35rem;
+}
+
+.town-card__body h3 {
+  font-size: 1.28rem;
+}
+
+.town-card__body p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.guide-card {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 38%) 1fr;
+  min-height: 12rem;
+}
+
+.guide-card__media {
+  min-height: 100%;
+}
+
+.guide-card__body {
+  align-self: center;
+  padding: 1.25rem;
+}
+
+.guide-card__body h3 {
+  font-size: 1.22rem;
+}
+
+.guide-card__body p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.guide-card__body span {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+}
+
+.plan-band {
+  padding: clamp(3.25rem, 7vw, 5rem) 0;
+  background: var(--ridge-blue);
+  color: white;
+}
+
+.plan-band__inner {
+  display: grid;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.plan-band h2 {
+  margin-bottom: var(--space-2);
+  color: white;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  letter-spacing: -0.025em;
+}
+
+.plan-band p:not(.eyebrow) {
+  max-width: 42rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.plan-band .button {
+  width: fit-content;
+}
+
+.home-trust {
+  padding: clamp(3.5rem, 7vw, 5rem) 0 clamp(5.5rem, 9vw, 7rem);
+}
+
+.home-trust__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.home-trust h2 {
+  margin-bottom: var(--space-2);
+  font-size: 1.75rem;
+}
+
+.home-trust p {
+  max-width: 50rem;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.photo-credits {
+  max-width: 50rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.photo-credits summary {
+  padding: 0.85rem 0;
+  color: var(--forest-pine);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.photo-credits__body {
+  padding: 0 0 var(--space-5);
+  font-size: 0.86rem;
+}
+
+.photo-credits__body ul {
+  margin: var(--space-4) 0;
+  padding-left: 1.15rem;
+}
+
+.photo-credits__body li + li {
+  margin-top: var(--space-2);
+}
+
+@media (min-width: 560px) {
+  .town-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .planning-grid,
+  .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value-strip__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .value-strip__grid > div {
+    padding: 1.7rem var(--space-5);
+  }
+
+  .value-strip__grid > div:first-child {
+    padding-left: 0;
+  }
+
+  .value-strip__grid > div:last-child {
+    padding-right: 0;
+  }
+
+  .value-strip__grid > div + div {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .section-heading--split {
+    grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+    align-items: end;
+  }
+
+  .plan-band__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (min-width: 960px) {
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+
+  .planning-grid,
+  .guide-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .town-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .home-hero {
+    min-height: 37rem;
+  }
+
+  .home-hero__overlay {
+    background: linear-gradient(0deg, rgba(13, 29, 22, 0.94) 0%, rgba(13, 29, 22, 0.56) 72%, rgba(13, 29, 22, 0.28) 100%);
+  }
+
+  .home-hero__content {
+    padding-bottom: 3.5rem;
+  }
+
+  .button-row .button {
+    width: 100%;
+  }
+
+  .guide-card {
+    grid-template-columns: 8rem 1fr;
+  }
+}
+
+@media (max-width: 390px) {
+  .guide-card {
+    display: block;
+  }
+
+  .guide-card__media {
+    aspect-ratio: 16 / 9;
+  }
 }
