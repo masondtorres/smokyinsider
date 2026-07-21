@@ -1,48 +1,46 @@
-# SmokyInsider.com
+# SmokyInsider Prototype
 
-Production-ready first version of the Smoky Mountains trip-planning utility.
+> **PROTOTYPE ONLY. DO NOT DEPLOY TO SMOKYINSIDER.COM.**
+>
+> The canonical production repository is `masondtorres/smokies-insider-guide`.
+> The live Vercel project and domain must continue to deploy from that repository unless the project owner explicitly changes the source of truth.
 
-**Core promise:** Explore the Smokies. Save what fits. Build a trip that actually works.
+This repository contains Grok's July 2026 first-version product experiment for the Smoky Mountains trip-planning utility.
 
-## Stack
+Useful planner concepts from this prototype have been transferred into a protected integration branch in the canonical repository. This repository remains available as a reference and donor build only.
 
-- Next.js 16.2 (App Router)
+## Prototype stack
+
+- Next.js 16.2
 - TypeScript
 - React 19
-- CSS design tokens (no heavy UI library)
+- CSS design tokens
 - Browser localStorage for My Plan
 
-## Quick start
+## Prototype limitations
+
+- Sample cards are marked `isSample: true`
+- Legal pages are drafts
+- Publisher and contact details were not confirmed in this build
+- It has not replaced the established production route set, sitemap, canonicals or deployment controls
+- It must not be connected to the smokyinsider.com production domain
+
+## Canonical production source
+
+Use:
+
+```text
+https://github.com/masondtorres/smokies-insider-guide
+```
+
+The canonical repository preserves the existing site content, production routes, `www` canonicals, Search Console continuity and Vercel deployment history.
+
+## Local prototype use
 
 ```bash
 npm install
 npm run dev
-```
-
-Open http://localhost:3000
-
-```bash
 npm run build
-npm start
 ```
 
-## Product notes
-
-- My Plan is the product. Save → organize by day → see warnings.
-- Cards carry best-for, skip-if, time, parking-tag, and verification fields.
-- Sample data is marked `isSample: true`. Replace before treating as live facts.
-- No CMS, no database, no auth in v1.
-- Legal pages are drafts for human review.
-- Independent site. Not affiliated with NPS.
-
-## Environment
-
-Copy `.env.example` to `.env.local` and fill verification / analytics IDs when ready.
-
-## Deployment
-
-Connect the GitHub repo to Vercel. Set the domain smokyinsider.com. Preview deployments are automatic on push.
-
-## License / ownership
-
-All rights reserved. House of Torres Publishers / project owner to confirm final publisher identity.
+Open `http://localhost:3000` for local review only.
